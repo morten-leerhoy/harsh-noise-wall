@@ -1,5 +1,6 @@
 #include "Yggdrasil.hpp"
-
+#include <cstdlib>
+#include <ctime>
 
 struct HarshNoiseWall : Module {
 	enum ParamIds {
@@ -32,6 +33,8 @@ struct HarshNoiseWall : Module {
 
 
 void HarshNoiseWall::step() {
+	
+	/* simple rnd noise */
 	// Implement a simple sine oscillator
 	float deltaTime = 1.0 / engineGetSampleRate();
 
@@ -49,16 +52,11 @@ void HarshNoiseWall::step() {
 	// Compute the sine output
 	float sine = sinf(2 * M_PI * phase);
 	float random = randomNormal();
+	
 	outputs[SINE_OUTPUT].value = 5.0 * sine * random;
+	/* end simple rnd noise */
 	
 	int harshness = static_cast<int>(std::round(params[HARSH_PARAM].value));
-	
-	
-	
-	//HNW 
-	//double ss[] = new double[harshness];
-	//int r = rand();
-	//printf("%d\n", r);
 }
 
 
